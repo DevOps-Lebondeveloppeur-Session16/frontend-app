@@ -1,5 +1,4 @@
 name: frontend-app-stack
-
 # Define services
 services:
   frontend-app:
@@ -12,8 +11,7 @@ services:
     ports:
       - '3000:80'  # Map port 3000 on the host to port 80 in the container
     networks:
-      - frontend-app-networ
-      k  # Connect to the defined network
+      - frontend-app-network  # Connect to the defined network
 
 # Define networks
 networks:
