@@ -41,6 +41,18 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
+  grype-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: chekout Code
+        uses: actions/checkout@v6
+      - name: build docker image
+        run: docker build -t ${{env.IMAGE_NAME}} --build-arg VITE_API_URL=${{env.VITE_API_URL}} .
+      - name: Scan image
+        uses: anchore/scan-action@v7
+        with:
+          image: ${{env.IMAGE_NAME}}
+
   build-and-push:
     runs-on: ubuntu-latest
     needs: [unit-test, sonarqube-code-quality-scan-job]
